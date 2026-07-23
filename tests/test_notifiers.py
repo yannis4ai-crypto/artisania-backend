@@ -25,13 +25,13 @@ class MailjetNotifierTests(unittest.IsolatedAsyncioTestCase):
 
 class SinchNotifierTests(unittest.IsolatedAsyncioTestCase):
     async def test_send_sms_requires_api_key(self):
-        with patch.object(settings, "sinch_api_key", ""):
+        with patch.object(settings, "sinch_api_token", ""):
             with self.assertRaises(RuntimeError):
                 await sinch_notifier.send_sms(to="+33600000000", body="y")
 
     async def test_send_sms_calls_api_without_real_network(self):
         with (
-            patch.object(settings, "sinch_api_key", "key"),
+            patch.object(settings, "sinch_api_token", "key"),
             patch.object(settings, "sinch_service_plan_id", "plan"),
             patch.object(settings, "sinch_sender_number", "+33700000000"),
             patch("httpx.AsyncClient.post", new_callable=AsyncMock) as mock_post,

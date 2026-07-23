@@ -17,7 +17,10 @@ class Settings(BaseSettings):
     mailjet_api_secret: str = ""
     mailjet_sender_email: str = ""
 
-    sinch_api_key: str = ""
+    # Nommage distinct de services/relances/sinch_notifier.py (SINCH_API_KEY=
+    # Service Plan ID, SINCH_API_SECRET=token là-bas) pour éviter toute
+    # collision de sens sur un même .env — cf commentaire dans .env.example.
+    sinch_api_token: str = ""
     sinch_service_plan_id: str = ""
     sinch_sender_number: str = ""
 
