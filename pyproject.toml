@@ -1,0 +1,17 @@
+[project]
+name = "artisania-backend"
+version = "0.1.0"
+description = "Assistant administratif cloud pour artisans et TPE — backend FastAPI"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "jinja2>=3.1",
+    "python-multipart>=0.0.20",
+    "pydantic-settings>=2.6",
+    "asyncpg>=0.29",
+    "httpx>=0.28",
+]
+
+[tool.uv]
+package = false
