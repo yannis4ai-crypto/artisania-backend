@@ -1,7 +1,55 @@
 # CLAUDE.md
 
 > Mémoire de travail du projet. À lire avant toute session de développement.
-> Dernière mise à jour : 22 juillet 2026.
+> Dernière mise à jour : 23 juillet 2026.
+
+---
+
+## Règles fichiers (vérification obligatoire)
+
+1. VÉRIFIER AVANT D'AFFIRMER
+   - N'affirme jamais qu'un fichier, un dossier ou un chemin existe sans l'avoir
+     lu ou listé au préalable.
+   - Ne cite jamais le contenu d'un fichier sans l'avoir ouvert dans cette session.
+   - Formules autorisées en cas de doute : "je n'ai pas encore vérifié", "ce
+     fichier n'existe peut-être pas", "à confirmer".
+
+2. NE PAS INVENTER
+   - Pas de noms de fichiers, chemins, ou structures de dossiers supposés.
+   - Si une information sur le système de fichiers manque, la chercher (listing,
+     lecture) au lieu de la deviner.
+
+3. CRÉATION DE FICHIERS = SUR DEMANDE OU NÉCESSITÉ RÉELLE
+   - Ne crée un fichier que si : (a) l'utilisateur l'a demandé, ou (b) la tâche
+     l'exige clairement.
+   - Ne crée pas de fichiers "bonus" non demandés (README, notes, exemples) sauf
+     demande explicite.
+   - En cas d'ambiguïté sur l'opportunité de créer un fichier, demander d'abord.
+
+4. AVANT DE CRÉER OU MODIFIER
+   - Vérifier si le fichier existe déjà pour ne pas l'écraser par erreur.
+   - Pour toute modification, lire le fichier réel avant de l'éditer.
+
+---
+
+## Codegraph — exploration de code (AVANT tout grep/Read)
+
+À chaque nouvelle session (ou worktree frais), si l'outil est connecté :
+```bash
+codegraph build
+```
+Si `.codegraph/graph.db` existe déjà → skip (build incrémentale).
+
+Puis utiliser les tools MCP `codegraph` AVANT tout grep/Read — 1 query ciblée
+remplace 5-10 lectures de fichiers (préfixe `mcp__codegraph__`) :
+- `where`, `context`, `structure`, `module_map` — localisation & vue d'ensemble
+- `execution_flow`, `sequence`, `path` — navigation de flux d'appels
+- `impact_analysis`, `fn_impact`, `diff_impact`, `co_changes` — analyse d'impact avant changement
+- `semantic_search` — requête langage naturel (si embeddings buildés)
+
+Fallback file reading si codegraph renvoie un contexte insuffisant, **ou si les
+tools `mcp__codegraph__*` ne sont pas connectés dans la session courante** —
+ne pas bloquer dessus, ne pas supposer une panne.
 
 ---
 
