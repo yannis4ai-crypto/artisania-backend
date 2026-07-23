@@ -7,15 +7,15 @@
 
 ## 🟠 Maintenant — rien ne bloque, à faire en premier
 
-- [ ] Committer le travail staged en commits atomiques (seul `f570f54` bootstrap existe)
-- [ ] Ajouter `.DS_Store` au `.gitignore`
-- [ ] **Étendre le schéma en UNE passe** : dossier chantier, engagements, micro-CRM, logbook (tâches + agenda), champ `role`, session par device, tables `pgvector`. *Deux migrations séparées = dette immédiate.*
-- [ ] Écrire `services/relances/mailjet_notifier.py` + tests (API mockée)
-- [ ] Écrire `services/relances/sinch_notifier.py` + tests
-- [ ] Supprimer `gmail_notifier.py`, mettre à jour `.env.example`
-- [ ] Vérifier que les 11 tests du moteur de relances passent sans modification
+- [x] Committer le travail staged en commits atomiques (seul `f570f54` bootstrap existe) — `services/relances` et `services/devis` committés dans `artisania-backend` (23/07)
+- [x] Ajouter `.DS_Store` au `.gitignore`
+- [ ] **Étendre le schéma en UNE passe** : dossier chantier, engagements, micro-CRM, logbook (tâches + agenda), champ `role`, session par device, tables `pgvector`. *Deux migrations séparées = dette immédiate.* — `data/schema.sql` actuel couvre uniquement le contrat Phase 0 vérifié par les tests (artisans/clients/devis/factures/relances), pas cette extension
+- [x] Écrire `services/relances/mailjet_notifier.py` + tests (API mockée) — déjà écrit hors repo, committé et testé (23/07)
+- [x] Écrire `services/relances/sinch_notifier.py` + tests — idem
+- [x] Supprimer `gmail_notifier.py`, mettre à jour `.env.example` — `gmail_notifier.py` absent du dépôt (déjà fait ailleurs) ; `.env.example` documente maintenant les deux jeux d'identifiants Mailjet/Sinch (web app vs `services/relances`, noms volontairement distincts pour éviter une collision de sens sur `SINCH_API_KEY`)
+- [x] Vérifier que les tests du moteur de relances passent sans modification — 23 tests passent tels quels (`services/relances/`), 4 pour `services/devis` = 27 au total. ⚠️ Ce backlog et `CLAUDE.md` §6 mentionnaient "11 tests" pour le moteur seul ; `test_engine.py` en contient 7 — écart non expliqué, à confirmer si "11" faisait référence à autre chose
 - [ ] Créer les comptes Mailjet et Sinch, authentifier le domaine (SPF/DKIM)
-- [ ] Introduire la constante `PRODUCT_NAME` — le nom n'est pas tranché, ne jamais le coder en dur
+- [ ] Introduire la constante `PRODUCT_NAME` — le nom n'est pas tranché, ne jamais le coder en dur. Fait côté web app (`config.py`) ; **pas fait côté `services/relances/mailjet_notifier.py`**, qui code encore "Artisia" en dur (sender Name, from_email par défaut, objet du mail) — non modifié pour ne pas risquer de casser du code testé sans validation
 
 ---
 
